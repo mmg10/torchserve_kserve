@@ -1,0 +1,35 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "intel"
+spec:
+  transformer:
+    logger:
+      mode: all
+    containers:
+      - image: kserve/torchserve-image-transformer:latest
+        name: kfserving-container
+        env:
+          - name: STORAGE_URI
+            value: s3://kubebucket10/cifar34
+        # resources:
+        #   requests:
+        #     cpu: 300m
+        #     memory: 256Mi
+        #   limits:
+        #     cpu: 500m
+        #     memory: 512Mi
+  predictor:
+    logger:
+      mode: all
+    pytorch:
+      storageUri: s3://kubebucket10/cifar34
+      # resources:
+      #   requests:
+      #     cpu: 500m
+      #     memory: 512Mi
+      #   limits:
+      #     cpu: 1000m
+      #     memory: 512Mi
+
+

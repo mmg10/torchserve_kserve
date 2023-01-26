@@ -1,0 +1,19 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "intel"
+spec:
+  predictor:
+    logger:
+      mode: all
+    pytorch:
+      storageUri: s3://kubebucket10/cifar34
+      # resources:
+      #   requests:
+      #     cpu: 500m
+      #     memory: 512Mi
+      #   limits:
+      #     cpu: 1000m
+      #     memory: 512Mi
+
+
